@@ -4,8 +4,8 @@ const { auth } = App.middleware();
 
 module.exports = {
   register() { },
-  boot({ app, router, name }) {
-    if (name !== 'express') return;
+  boot({ app, router, type }) {
+    if (type !== 'express') return;
 
     router.post('/graphql', auth, async (req, res) => {
       let compact = require('./compact')(req);
