@@ -7,7 +7,7 @@ module.exports = {
   boot({ app, router, type }) {
     if (type !== 'express') return;
 
-    router.post('/graphql', auth, async (req, res) => {
+    router.post('/graphql', auth ? auth : (req, res, next) => {next();}, async (req, res) => {
       let compact = require('./compact')(req);
 
       if (!req.body.schema || !req.body.query) {
