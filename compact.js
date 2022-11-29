@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const basename = path.dirname(require.main.filename);
-const { modules } = App.rootConfig;
+const { modules } = App.options;
 
 module.exports = (request) => {
   let schema = {};
