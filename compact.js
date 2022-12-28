@@ -17,10 +17,9 @@ module.exports = (request) => {
   modules.forEach((el) => {
     let root = null;
 
-    // Check if have #
-    if (el.charAt(0) === '#') root = [basename, 'src', el.replace(/^#/, ''), 'graphql'].join(path.sep);
-    else root = [basename, 'node_modules', el, 'graphql'].join(path.sep);
-
+    // Check if have not start @
+    if (el.charAt(0) !== '@') root = [basename, 'src', el, 'graphql'].join(path.sep);
+    else root = [basename, 'node_modules', el.replace(/^@/, ''), 'graphql'].join(path.sep);
 
     if (fs.existsSync(root)) {
       fs
