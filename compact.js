@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const basename = path.dirname(require.main.filename);
 const { modules } = App.options;
 
 module.exports = (request) => {
@@ -15,11 +14,7 @@ module.exports = (request) => {
   }
 
   modules.forEach((el) => {
-    let root = null;
-
-    // Check if have not start @
-    if (el.charAt(0) !== '@') root = [basename, 'src', el, 'graphql'].join(path.sep);
-    else root = [basename, 'node_modules', el.replace(/^@/, ''), 'graphql'].join(path.sep);
+    let root = __modulePath(el, 'graphql');
 
     if (fs.existsSync(root)) {
       fs
