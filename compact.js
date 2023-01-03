@@ -14,7 +14,7 @@ module.exports = (request) => {
   }
 
   modules.forEach((el) => {
-    let root = __modulePath(el, 'graphql');
+    let root = App.base.modulePath(el, 'graphql');
 
     if (fs.existsSync(root)) {
       fs
