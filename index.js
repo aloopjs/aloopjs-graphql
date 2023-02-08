@@ -1,6 +1,6 @@
 let { graphql } = require('graphql');
 let { makeExecutableSchema } = require('graphql-tools');
-const { auth } = App.middleware();
+const { GraphqlHelper } = App.helpers();
 
 module.exports = {
   register() { },
@@ -9,7 +9,7 @@ module.exports = {
 
     let router = require('express').Router();
 
-    router.post('/graphql', auth ? auth : (req, res, next) => {next();}, async (req, res) => {
+    router.post('/graphql', GraphqlHelper.auth(), async (req, res) => {
       let compact = require('./compact')(req);
 
       if (!req.body.schema || !req.body.query) {
