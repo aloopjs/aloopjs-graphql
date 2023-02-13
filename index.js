@@ -4,12 +4,13 @@ const { GraphqlHelper } = App.helpers();
 
 module.exports = {
   register() { },
-  boot({ app, type }) {
+  async boot({ app, type }) {
     if (type !== 'express') return;
 
     let router = require('express').Router();
+    let authMidd = await GraphqlHelper.auth();
 
-    router.post('/graphql', GraphqlHelper.auth(), async (req, res) => {
+    router.post('/graphql', authMidd, async (req, res) => {
       let compact = require('./compact')(req);
 
       if (!req.body.schema || !req.body.query) {
