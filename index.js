@@ -21,8 +21,9 @@ module.exports = {
         return res.status(422).json({ message: `Schema ${req.body.schema} not exists` });
       }
 
+      let parse = await GraphqlHelper.resolveSchema(compact[req.body.schema]);
       let grres = await graphql(
-        makeExecutableSchema(await GraphqlHelper.genTypes(compact[req.body.schema])),
+        makeExecutableSchema(parse),
         req.body.query
       );
 
