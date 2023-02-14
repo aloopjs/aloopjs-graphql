@@ -9,7 +9,7 @@ module.exports = {
     }).join(' ') + (first ? ' ' : '}');
   },
 
-  handle: function (state, data) {
+  handle(state, data) {
     return this.parse(data, true);
   }
 };
