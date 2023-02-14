@@ -5,7 +5,7 @@ module.exports = {
     if (typeof data === 'string') return data;
 
     return (first ? '' : '{') + Object.keys(data).map(name => {
-      return (first ? 'type ' : ' ') + name + (first ? ' ' : ': ') + this.parse(data, false)
+      return (first ? 'type ' : ' ') + name + (first ? ' ' : ': ') + this.parse(data[name], false)
     }).join(' ') + (first ? ' ' : '}');
   },
 

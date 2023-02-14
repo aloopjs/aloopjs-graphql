@@ -1,6 +1,6 @@
 {
   "name": "rexijs-graphql",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "devDependencies": {
     "graphql": "^16.6.0",
     "graphql-tools": "^8.3.12"
