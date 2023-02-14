@@ -1,0 +1,15 @@
+module.exports = {
+  name: 'genTypes',
+  group: 'GraphqlHelper',
+  parse(data, first) {
+    if (typeof data === 'string') return data;
+
+    return (first ? '' : '{') + Object.keys(data).map(name => {
+      return (first ? 'type ' : ' ') + name + (first ? ' ' : ': ') + this.parse(data, false)
+    }).join(' ') + (first ? ' ' : '}');
+  },
+
+  handle: function (state, data) {
+    return this.parse(data, true);
+  }
+};

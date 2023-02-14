@@ -22,7 +22,7 @@ module.exports = {
       }
 
       let grres = await graphql(
-        makeExecutableSchema(compact[req.body.schema]),
+        makeExecutableSchema(await GraphqlHelper.genTypes(compact[req.body.schema])),
         req.body.query
       );
 

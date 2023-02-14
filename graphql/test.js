@@ -3,15 +3,24 @@ module.exports = {
   name: 'Test',
 
   typeDefs({schema, request}){
-    return `
-			type Item{
-				name: String!
+		return {
+			Item: {
+				name: 'String!'
+			},
+			Query: {
+				items: '[Item]'
 			}
+		};
 
-			type Query{
-				items: [Item]
-			}
-		`;
+    // return `
+		// 	type Item{
+		// 		name: String!
+		// 	}
+
+		// 	type Query{
+		// 		items: [Item]
+		// 	}
+		// `;
   },
 
 	resolvers: ({schema, request}) => {
