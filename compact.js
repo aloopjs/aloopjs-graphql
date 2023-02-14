@@ -8,8 +8,8 @@ module.exports = (request) => {
   function add(dir, file) {
     let sc = require(path.join(dir, file));
     schema[sc.name] = {
-      typeDefs: sc.typeDefs({ schema, request }),
-      resolvers: sc.resolvers({ schema, request })
+      models: sc.models({ schema, request }),
+      data: sc.data({ schema, request })
     };
   }
 

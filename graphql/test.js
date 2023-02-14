@@ -1,8 +1,8 @@
 
 module.exports = {
-  name: 'Test',
+	name: 'Test',
 
-  typeDefs({schema, request}){
+	models({ schema, request }) {
 		return {
 			Item: {
 				name: 'String!'
@@ -11,27 +11,15 @@ module.exports = {
 				items: '[Item]'
 			}
 		};
+	},
 
-    // return `
-		// 	type Item{
-		// 		name: String!
-		// 	}
-
-		// 	type Query{
-		// 		items: [Item]
-		// 	}
-		// `;
-  },
-
-	resolvers: ({schema, request}) => {
+	data: ({ schema, request }) => {
 		return {
-			Query: {
-				items(parent) {
-					return [
-						{name: 'Item 1'},
-						{name: 'Item 2'}
-					]
-				}
+			items(parent) {
+				return [
+					{ name: 'Item 1' },
+					{ name: 'Item 2' }
+				];
 			}
 		}
 	}

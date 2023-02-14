@@ -1,5 +1,4 @@
-let { graphql } = require('graphql');
-let { makeExecutableSchema } = require('graphql-tools');
+let { graphql, buildSchema } = require('graphql');
 const { GraphqlHelper } = App.helpers();
 
 module.exports = {
@@ -22,10 +21,11 @@ module.exports = {
       }
 
       let parse = await GraphqlHelper.resolveSchema(compact[req.body.schema]);
-      let grres = await graphql(
-        makeExecutableSchema(parse),
-        req.body.query
-      );
+      let grres = await graphql({
+        schema: buildSchema(parse.models),
+        rootValue: parse.data,
+        source: req.body.query
+      });
 
       if (grres.errors) {
         return res.status(401).json({ errors: grres.errors });
