@@ -6,10 +6,30 @@ module.exports = (request) => {
   let schema = {};
 
   function add(dir, file) {
+    schema[sc.name] = schema[sc.name] || {
+      models: {
+        Query: {}
+      },
+      data: {}
+    };
+
     let sc = require(path.join(dir, file));
+    let models = sc.models({ schema, request });
+    let data = sc.data({ schema, request });
+
     schema[sc.name] = {
-      models: sc.models({ schema, request }),
-      data: sc.data({ schema, request })
+      models: {
+        ...schema[sc.name].models,
+        ...models,
+        Query: {
+          ...schema[sc.name].models.Query,
+          ...(models.Query || {})
+        }
+      },
+      data: {
+        ...schema[sc.name].data,
+        ...data
+      }
     };
   }
 
