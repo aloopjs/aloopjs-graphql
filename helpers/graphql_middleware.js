@@ -3,7 +3,7 @@ module.exports = {
   group: 'GraphqlHelper',
   handle: function(state, data){
     return (req, res, next) => {
-      let compact = require('./compact')(req);
+      let compact = require('../compact')(req);
       let middleware = {};
 
       for (let i = 0; i < req.body.length; i++) {
