@@ -7,13 +7,12 @@ module.exports = {
     if (type !== 'express') return;
 
     let router = require('express').Router();
-    let authMidd = await GraphqlHelper.auth();
+    let middleware = await GraphqlHelper.middleware();
 
-    router.post('/graphql', authMidd, async (req, res) => {
+    router.post('/graphql', middleware, async (req, res) => {
       let compact = require('./compact')(req);
       let result = {};
 
-      // Chec if
       if (!(req.body instanceof Array)) {
         return res.status(422).json({ message: 'Bad request' });
       }

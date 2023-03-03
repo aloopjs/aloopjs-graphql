@@ -9,11 +9,13 @@ module.exports = (request) => {
     let sc = require(path.join(dir, file));
     let models = sc.models({ schema, request });
     let data = sc.data({ schema, request });
+    let middleware = sc.middleware ? sc.middleware({schema, request }) : {};
 
     schema[sc.name] = schema[sc.name] || {
       models: {
         Query: {}
       },
+      middleware: {},
       data: {}
     };
 
@@ -29,6 +31,10 @@ module.exports = (request) => {
       data: {
         ...schema[sc.name].data,
         ...data
+      },
+      middleware: {
+        ...schema[sc.name].middleware,
+        ...middleware
       }
     };
   }
