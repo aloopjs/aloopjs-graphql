@@ -12,14 +12,15 @@ module.exports = {
     router.post('/graphql', middleware, async (req, res) => {
       let compact = require('./compact')(req);
       let result = {};
+      let response = await GraphqlHelper.response(res);
 
       if (!(req.body instanceof Array)) {
-        return res.status(422).json({ message: 'Bad request' });
+        return response(422, { message: 'Bad request' });
       }
 
       for (let i = 0; i < req.body.length; i++) {
         if (!compact[req.body[i].schema]) {
-          return res.status(422).json({ message: `Schema ${req.body[i].schema} not exists` });
+          return response(422, { message: `Schema ${req.body[i].schema} not exists` });
         }
       }
 
@@ -32,13 +33,13 @@ module.exports = {
         });
 
         if (grres.errors) {
-          return res.status(401).json({ schema: req.body[i].schema, errors: grres.errors });
+          return response(422, { schema: req.body[i].schema, errors: grres.errors });
         }
 
         result[req.body[i].schema] = grres.data;
       }
 
-      return res.status(200).json(result);
+      return response(200, result);
     });
 
     app.use(router);
