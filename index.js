@@ -1,5 +1,5 @@
 let { graphql, buildSchema } = require('graphql');
-const { GraphqlHelper } = App.services();
+const { GraphQL } = App.services();
 
 module.exports = {
   register() { },
@@ -7,12 +7,12 @@ module.exports = {
     if (type !== 'express') return;
 
     let router = require('express').Router();
-    let middleware = await GraphqlHelper.middleware();
+    let middleware = await GraphQL.middleware();
 
     router.post('/graphql', middleware, async (req, res) => {
       let compact = require('./compact')(req);
       let result = {};
-      let response = await GraphqlHelper.response(res);
+      let response = await GraphQL.response(res);
 
       if (!(req.body instanceof Array)) {
         return response(422, { message: 'Bad request' });
@@ -25,7 +25,7 @@ module.exports = {
       }
 
       for (let i = 0; i < req.body.length; i++) {
-        let parse = await GraphqlHelper.resolveSchema(compact[req.body[i].schema]);
+        let parse = await GraphQL.resolveSchema(compact[req.body[i].schema]);
         let grres = await graphql({
           schema: buildSchema(parse.models),
           rootValue: parse.data,

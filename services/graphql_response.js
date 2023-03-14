@@ -1,6 +1,6 @@
 module.exports = {
   name: 'response',
-  group: 'GraphqlHelper',
+  group: 'GraphQL',
   replace: true,
   handle(state, res) {
     return (code, data) => {

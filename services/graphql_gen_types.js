@@ -17,7 +17,7 @@ const __parse = function(data, first) {
 
 module.exports = {
   name: 'resolveSchema',
-  group: 'GraphqlHelper',
+  group: 'GraphQL',
   handle(state, data) {
     data.models = __parse(data.models, true);
     return data;

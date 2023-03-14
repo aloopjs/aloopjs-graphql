@@ -1,6 +1,6 @@
 module.exports = {
   name: 'middleware',
-  group: 'GraphqlHelper',
+  group: 'GraphQL',
   handle: function(state, data){
     return (req, res, next) => {
       let compact = require('../compact')(req);
