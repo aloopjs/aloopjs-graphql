@@ -1,5 +1,5 @@
 let { graphql, buildSchema } = require('graphql');
-const { GraphqlHelper } = App.helpers();
+const { GraphqlHelper } = App.services();
 
 module.exports = {
   register() { },
