@@ -1,5 +1,5 @@
 {
-  "name": "aloopjs-graphql",
+  "name": "@aloopjs/graphql",
   "version": "1.0.0",
   "devDependencies": {
     "graphql": "^16.6.0"
