@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { modules } = App.options;
+const { modules } = Aloop.options;
 
 module.exports = (request) => {
   let schema = {};
@@ -40,7 +40,7 @@ module.exports = (request) => {
   }
 
   modules.forEach((el) => {
-    let root = App.base.modulePath(el, 'graphql');
+    let root = Aloop.base.modulePath(el, 'graphql');
 
     if (fs.existsSync(root)) {
       fs

@@ -1,5 +1,5 @@
 let { graphql, buildSchema } = require('graphql');
-const { GraphQL } = App.services();
+const { GraphQL } = Aloop.services();
 
 module.exports = {
   register() { },
